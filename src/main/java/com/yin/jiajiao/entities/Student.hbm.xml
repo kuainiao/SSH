@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.yin.jiajiao.entities.Student" table="student">
+
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="native" />
+		</id>
+
+		<property name="linkName" type="java.lang.String">
+			<column name="linkName" />
+		</property>
+		<property name="linkTel" type="java.lang.String">
+			<column name="linkTel" />
+		</property>
+		<property name="loginName" type="java.lang.String">
+			<column name="loginName" />
+		</property>
+		<property name="password" type="java.lang.String">
+			<column name="password" />
+		</property>
+		<property name="studentGrade" type="java.lang.String">
+			<column name="studentGrade" />
+		</property>
+		<property name="studentCourse" type="java.lang.String">
+			<column name="studentCourse" />
+		</property>
+		<property name="otherAsk" type="java.lang.String">
+			<column name="otherAsk" />
+		</property>
+		<property name="remuneration" type="java.lang.String">
+			<column name="remuneration" />
+		</property>
+		<property name="teachTime" type="java.lang.String">
+			<column name="teachTime" />
+		</property>
+		<property name="studentSex" type="java.lang.Integer">
+			<column name="studentSex" />
+		</property>
+		<property name="studentAddr" type="java.lang.String">
+			<column name="studentAddr" />
+		</property>
+		<property name="AddrInfo" type="java.lang.String">
+			<column name="AddrInfo" />
+		</property>
+		<property name="studentDesc" type="java.lang.String">
+			<column name="studentDesc" />
+		</property>
+		<property name="studentType" type="java.lang.String">
+			<column name="studentType" />
+		</property>
+		<property name="studentState" type="java.lang.String">
+			<column name="studentState" />
+		</property>
+		<property name="orderTeachers" type="java.lang.String">
+			<column name="orderTeachers" />
+		</property>
+		<property name="countTimes" type="java.lang.String">
+			<column name="countTimes" />
+		</property>
+		<property name="isShow" type="java.lang.String">
+			<column name="isShow" />
+		</property>
+		<property name="operator" type="java.lang.String">
+			<column name="operator" />
+		</property>
+		<property name="createTime" type="java.lang.String">
+			<column name="createTime" />
+		</property>
+
+	</class>
+</hibernate-mapping>

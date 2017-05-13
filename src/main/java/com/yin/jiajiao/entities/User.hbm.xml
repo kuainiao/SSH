@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+	<class name="com.yin.jiajiao.entities.User" table="user">
+
+		<id name="id" type="java.lang.Integer">
+			<column name="id" />
+			<generator class="native" />
+		</id>
+
+		<property name="trueName" type="java.lang.String">
+			<column name="trueName" />
+		</property>
+		<property name="userName" type="java.lang.String">
+			<column name="userName" />
+		</property>
+		<property name="password" type="java.lang.String">
+			<column name="password" />
+		</property>
+		<property name="lastLoginTime" type="java.lang.String">
+			<column name="lastLoginTime" />
+		</property>
+		<property name="createUser" type="java.lang.String">
+			<column name="createUser" />
+		</property>
+		<property name="createTime" type="java.lang.String">
+			<column name="createTime" />
+		</property>
+		<property name="operator" type="java.lang.String">
+			<column name="operator" />
+		</property>
+		<property name="editTime" type="java.lang.String">
+			<column name="editTime" />
+		</property>
+		<property name="level" type="java.lang.String">
+			<column name="level" />
+		</property>
+		<property name="state" type="java.lang.String">
+			<column name="state" />
+		</property>
+		<property name="email" type="java.lang.String">
+			<column name="email" />
+		</property>
+		<property name="validateCode" type="java.lang.String">
+			<column name="validateCode" />
+		</property>
+
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- AdminBean -->
+	<bean id="adminDao" class="com.yin.jiajiao.dao.impl.admin.AdminDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="adminService" class="com.yin.jiajiao.service.impl.admin.AdminServiceImpl">
+		<property name="adminDao" ref="adminDao"></property>
+	</bean>
+	<bean id="adminAction" class="com.yin.jiajiao.action.admin.AdminAction">
+		<property name="adminService" ref="adminService"></property>
+	</bean>
+	<!-- AdminBean -->
+
+	<bean id="studentDao" class="com.yin.jiajiao.dao.impl.student.StudentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="studentService" class="com.yin.jiajiao.service.impl.student.StudentServiceImpl">
+		<property name="studentDao" ref="studentDao"></property>
+	</bean>
+	<bean id="studentAction" class="com.yin.jiajiao.action.student.StudentAction">
+		<property name="studentService" ref="studentService"></property>
+	</bean>
+
+
+</beans>
