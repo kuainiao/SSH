@@ -3,8 +3,9 @@ package com.yin.jiajiao.dao.impl;
 import java.util.List;
 
 import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 
-import com.yin.jiajiao.dao.BasDao;
 import com.yin.jiajiao.dao.inter.ITestDaoInteface;
 import com.yin.jiajiao.entities.User;
 
@@ -17,7 +18,16 @@ import com.yin.jiajiao.entities.User;
  * @CopyRight: Copyright © 2017
  * @version 1.0
  */
-public class TestDaoImpl extends BasDao implements ITestDaoInteface {
+public class TestDaoImpl implements ITestDaoInteface {
+	private SessionFactory sessionFactory;
+
+	public void setSessionFactory(SessionFactory sessionFactory) {
+		this.sessionFactory = sessionFactory;
+	}
+
+	public Session getSession() {
+		return this.sessionFactory.getCurrentSession();
+	}
 
 	public User login(User user) {
 		String hql = "FROM User u WHERE u.userName=? AND u.password=?";
@@ -26,7 +36,7 @@ public class TestDaoImpl extends BasDao implements ITestDaoInteface {
 		query.setString(1, user.getPassword());
 		@SuppressWarnings("unchecked")
 		List<User> users = query.list();
-		if(users != null && users.size() > 0) {
+		if (users != null && users.size() > 0) {
 			user = users.get(0);
 		} else {
 			user = null;

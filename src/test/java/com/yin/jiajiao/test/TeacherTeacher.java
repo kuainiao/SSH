@@ -60,10 +60,16 @@ public class TeacherTeacher {
 	public void testUpdate() {
 		teacher = teacherService.findTeacherById(2);
 		System.err.println(teacher.toString());
-		teacher.setRegTime("2017-05-14 17:44:28");
+		teacher.setRegTime("2018-05-14 17:44:28");
 		teacherService.saveTeacher(teacher);
 		teacher = teacherService.findTeacherById(2);
 		System.out.println(teacher.toString());
+	}
+	
+	@Test
+	public void testFindById() {
+		teacher = teacherService.findTeacherById(1);
+		System.err.println(teacher.toString());
 	}
 
 }

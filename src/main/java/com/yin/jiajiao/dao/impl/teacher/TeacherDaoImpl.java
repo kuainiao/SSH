@@ -3,9 +3,8 @@ package com.yin.jiajiao.dao.impl.teacher;
 import java.util.List;
 
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
+import com.yin.jiajiao.dao.BasDao;
 import com.yin.jiajiao.dao.inter.teacher.ITeacherDao;
 import com.yin.jiajiao.entities.Teacher;
 
@@ -17,16 +16,7 @@ import com.yin.jiajiao.entities.Teacher;
  * @CopyRight: Copyright © 2017
  * @version 1.0
  */
-public class TeacherDaoImpl implements ITeacherDao {
-	private SessionFactory sessionFactory;
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
-	public Session getSession() {
-		return this.sessionFactory.getCurrentSession();
-	}
+public class TeacherDaoImpl extends BasDao<Teacher> implements ITeacherDao {
 
 	@Override
 	public Teacher login(Teacher teacher) {
@@ -43,19 +33,12 @@ public class TeacherDaoImpl implements ITeacherDao {
 
 	@Override
 	public boolean saveTeacher(Teacher teacher) {
-		boolean saveSuccess = false;
-		try {
-			getSession().saveOrUpdate(teacher);
-			saveSuccess = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return saveSuccess;
+		return super.save(teacher);
 	}
 
 	@Override
 	public Teacher findTeacherById(Integer id) {
-		return (Teacher) getSession().get(Teacher.class, id);
+		return super.findById(Teacher.class, id);
 	}
 
 	@Override
@@ -64,6 +47,13 @@ public class TeacherDaoImpl implements ITeacherDao {
 		@SuppressWarnings("unchecked")
 		List<Teacher> lists = getSession().createQuery(hql).list();
 		return lists;
+	}
+
+	@Override
+	public Integer findCount() {
+		String hql = "SELECT count(*) FROM Teacher";
+		Integer count = (Integer) getSession().createQuery(hql).uniqueResult();
+		return count;
 	}
 
 }

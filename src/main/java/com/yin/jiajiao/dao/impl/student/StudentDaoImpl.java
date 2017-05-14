@@ -3,39 +3,20 @@ package com.yin.jiajiao.dao.impl.student;
 import java.util.List;
 
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
+import com.yin.jiajiao.dao.BasDao;
 import com.yin.jiajiao.dao.inter.student.IStudentDao;
 import com.yin.jiajiao.entities.Student;
 
-public class StudentDaoImpl implements IStudentDao {
+public class StudentDaoImpl extends BasDao<Student> implements IStudentDao {
 
-	private SessionFactory sessionFactory;
-
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
-	public Session getSession() {
-		return this.sessionFactory.getCurrentSession();
-	}
-
-	@Override
 	public boolean saveStudent(Student student) {
-		boolean saveSuccess = false;
-		try {
-			getSession().saveOrUpdate(student);
-			saveSuccess = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return saveSuccess;
+		return super.save(student);
 	}
 
 	@Override
 	public Student findStudentById(Integer id) {
-		return (Student) getSession().get(Student.class, id);
+		return super.findById(Student.class, id);
 	}
 
 	@Override
@@ -57,6 +38,13 @@ public class StudentDaoImpl implements IStudentDao {
 			return lists.get(0);
 		}
 		return null;
+	}
+
+	@Override
+	public Integer findCount() {
+		String hql = "SELECT count(*) FROM Student";
+		Integer count = (Integer) getSession().createQuery(hql).uniqueResult();
+		return count;
 	}
 
 }

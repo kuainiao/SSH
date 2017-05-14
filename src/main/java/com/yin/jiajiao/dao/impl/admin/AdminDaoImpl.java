@@ -3,9 +3,8 @@ package com.yin.jiajiao.dao.impl.admin;
 import java.util.List;
 
 import org.hibernate.Query;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
 
+import com.yin.jiajiao.dao.BasDao;
 import com.yin.jiajiao.dao.inter.admin.IAdminDao;
 import com.yin.jiajiao.entities.User;
 
@@ -18,18 +17,9 @@ import com.yin.jiajiao.entities.User;
  * @CopyRight: Copyright © 2017
  * @version 1.0
  */
-public class AdminDaoImpl implements IAdminDao {
-	
-	private SessionFactory sessionFactory;
+public class AdminDaoImpl extends BasDao<User> implements IAdminDao {
 
-	public void setSessionFactory(SessionFactory sessionFactory) {
-		this.sessionFactory = sessionFactory;
-	}
-
-	public Session getSession() {
-		return this.sessionFactory.getCurrentSession();
-	}
-
+	@Override
 	public User login(User user) {
 		String hql = "FROM User u WHERE u.userName=? AND u.password=?";
 		Query query = getSession().createQuery(hql);
@@ -45,25 +35,30 @@ public class AdminDaoImpl implements IAdminDao {
 		return user;
 	}
 
-	public User findUserById(User user) {
-		return (User) getSession().get(User.class, user.getId());
+	@Override
+	public Integer findCount() {
+		String hql = "SELECT count(*) FROM User";
+		Integer count = (Integer) getSession().createQuery(hql).uniqueResult();
+		return count;
 	}
-
-	public boolean saveUser(User user) {
-		boolean saveSuccess = false;
-		try {
-			getSession().saveOrUpdate(user);
-			saveSuccess = true;
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return saveSuccess;
-	}
-
+	
+	@Override
 	@SuppressWarnings("unchecked")
 	public List<User> findList() {
 		String hql = "FROM User";
 		return getSession().createQuery(hql).list();
+	}
+
+	public User findUserById(User user) {
+		return super.findById(User.class, user.getId());
+	}
+
+	public boolean saveUser(User user) {
+		return super.save(user);
+	}
+
+	public boolean updateUser(User user) {
+		return super.update(user);
 	}
 
 	public void updateLastLoginTime(User user) {
