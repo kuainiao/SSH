@@ -2,8 +2,9 @@ package com.yin.jiajiao.action;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.yin.jiajiao.entities.Teacher;
 import com.yin.jiajiao.entities.User;
-import com.yin.jiajiao.service.inter.ITestServiceInterface;
+import com.yin.jiajiao.service.inter.teacher.ITeacherService;
 
 /**
  * @Describe: 测试登录
@@ -14,10 +15,28 @@ import com.yin.jiajiao.service.inter.ITestServiceInterface;
  * @CopyRight: Copyright © 2017
  * @version 1.0
  */
-public class TestAction extends ActionSupport implements ModelDriven<User> {
+public class TestAction extends ActionSupport implements ModelDriven<Teacher> {
 
 	private static final long serialVersionUID = 1L;
-	private User model = new User();
+	private Teacher teacher = new Teacher();
+	private ITeacherService teacherService;
+	
+	public void setTeacherService(ITeacherService teacherService) {
+		this.teacherService = teacherService;
+	}
+
+	public String login() {
+		teacher = teacherService.login(teacher);
+		System.err.println(teacher);
+		return "login-success";
+	}
+
+	@Override
+	public Teacher getModel() {
+		return teacher;
+	}
+	
+	/*private User model = new User();
 	private ITestServiceInterface testService;
 
 	public void setTestService(ITestServiceInterface testService) {
@@ -39,5 +58,5 @@ public class TestAction extends ActionSupport implements ModelDriven<User> {
 	public User getModel() {
 		return model;
 	}
-
+*/
 }

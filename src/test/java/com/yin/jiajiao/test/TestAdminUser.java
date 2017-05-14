@@ -25,7 +25,9 @@ public class TestAdminUser {
 	@Test
 	public void testLogin() {
 		@SuppressWarnings("resource")
-		ApplicationContext ac = new FileSystemXmlApplicationContext("src/test/resources/applicationContext*.xml");
+		// ApplicationContext ac = new
+		// FileSystemXmlApplicationContext("src/main/resources/applicationContext*.xml");//获得main文件中的配置文件
+		ApplicationContext ac = new FileSystemXmlApplicationContext("src/test/resources/testSpringConfig.xml");
 		// ApplicationContext ac = new
 		// ClassPathXmlApplicationContext("applicationContext.xml");
 		// ITestServiceInterface testService = (ITestServiceInterface)
@@ -41,7 +43,7 @@ public class TestAdminUser {
 	@SuppressWarnings("resource")
 	@Test
 	public void testFindUserById() {
-		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext*.xml");
+		ApplicationContext ac = new ClassPathXmlApplicationContext("testSpringConfig.xml");
 		IAdminService adminService = (IAdminService) ac.getBean("adminService");
 		User user = new User();
 		user.setId(1);
@@ -54,7 +56,7 @@ public class TestAdminUser {
 	@Test
 	public void testSaveUser() {
 		@SuppressWarnings("resource")
-		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext*.xml");
+		ApplicationContext ac = new ClassPathXmlApplicationContext("testSpringConfig.xml");
 		IAdminService adminService = (IAdminService) ac.getBean("adminService");
 		User user = new User();
 		// user.setCreateTime("1990-09-21 12:12:12");
@@ -75,7 +77,7 @@ public class TestAdminUser {
 	@Test
 	public void testFindList() {
 		@SuppressWarnings("resource")
-		ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext*.xml");
+		ApplicationContext ac = new ClassPathXmlApplicationContext("testSpringConfig.xml");
 		IAdminService adminService = (IAdminService) ac.getBean("adminService");
 		List<User> users = adminService.findList();
 		Iterator<User> it = users.iterator();

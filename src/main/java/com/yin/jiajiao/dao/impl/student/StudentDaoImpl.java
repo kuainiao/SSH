@@ -25,7 +25,7 @@ public class StudentDaoImpl implements IStudentDao {
 	public boolean saveStudent(Student student) {
 		boolean saveSuccess = false;
 		try {
-			getSession().save(student);
+			getSession().saveOrUpdate(student);
 			saveSuccess = true;
 		} catch (Exception e) {
 			e.printStackTrace();

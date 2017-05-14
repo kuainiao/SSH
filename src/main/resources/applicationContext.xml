@@ -26,8 +26,7 @@
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
-		<property name="mappingLocations"
-			value="classpath:com/yin/jiajiao/entities/*.hbm.xml"></property>
+		<property name="mappingLocations" value="classpath:com/yin/jiajiao/entities/*.hbm.xml"></property>
 	</bean>
 
 	<!-- 配置 Spring 的声明式事务 -->

@@ -13,8 +13,9 @@
 	<bean id="adminAction" class="com.yin.jiajiao.action.admin.AdminAction">
 		<property name="adminService" ref="adminService"></property>
 	</bean>
-	<!-- AdminBean -->
 
+
+	<!-- StudentBean -->
 	<bean id="studentDao" class="com.yin.jiajiao.dao.impl.student.StudentDaoImpl">
 		<property name="sessionFactory" ref="sessionFactory"></property>
 	</bean>
@@ -24,6 +25,20 @@
 	<bean id="studentAction" class="com.yin.jiajiao.action.student.StudentAction">
 		<property name="studentService" ref="studentService"></property>
 	</bean>
+
+
+	<!-- TeacherBean -->
+	<bean id="teacherDao" class="com.yin.jiajiao.dao.impl.teacher.TeacherDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="teacherService" class="com.yin.jiajiao.service.impl.teacher.TeacherServiceImpl">
+		<property name="teacherDao" ref="teacherDao"></property>
+	</bean>
+	<bean id="teacherAction" class="com.yin.jiajiao.action.teacher.TeacherAction">
+		<property name="teacherService" ref="teacherService"></property>
+	</bean>
+
+
 
 
 </beans>

@@ -11,7 +11,11 @@
 
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>classpath:applicationContext*.xml</param-value>
+		<!--  全部扫描 包括main中的和test中的所以只配置一份就行，或者在两个文件中配置的文件名称不一样也行 -->
+		<!-- <param-value>classpath:applicationContext*.xml</param-value> -->
+		<param-value>
+			classpath:applicationContext*.xml
+		</param-value>
 	</context-param>
 
 	<listener>

@@ -8,7 +8,6 @@ import org.hibernate.SessionFactory;
  * @ClassName: com.yin.jiajiao.dao.BasDao
  * @WriterName: QQ
  * @CreateDate: 2017年5月10日 下午8:45:04
- * @Company: 北京龍兴科技股份有限公司
  * @CopyRight: Copyright © 2017
  * @version 1.0
  */

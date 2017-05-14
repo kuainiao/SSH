@@ -16,9 +16,15 @@
 
 	<a href="emp-input">Add New Employee</a>
 
-	<br>
+	<br>学生
 	<s:form action="student-login" method="post">
 		<s:textfield name="loginName" label="loginName"></s:textfield>
+		<s:textfield name="password" label="password"></s:textfield>
+		<s:submit>提交</s:submit>
+	</s:form>
+	<br>老师
+	<s:form action="teacher-login" method="get">
+		<s:textfield name="username" label="username"></s:textfield>
 		<s:textfield name="password" label="password"></s:textfield>
 		<s:submit>提交</s:submit>
 	</s:form>

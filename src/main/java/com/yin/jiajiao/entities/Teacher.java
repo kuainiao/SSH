@@ -11,7 +11,7 @@ package com.yin.jiajiao.entities;
  */
 public class Teacher {
 	private Integer id;
-	private String username;// 用户名
+	private String loginName;// 登录名
 	private String password;// 密码
 	private String regTime;// 注册时间
 	private Integer teacherSex;// 性别
@@ -56,12 +56,12 @@ public class Teacher {
 		this.id = id;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getLoginName() {
+		return loginName;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
 
 	public String getPassword() {
@@ -338,7 +338,7 @@ public class Teacher {
 
 	@Override
 	public String toString() {
-		return "Teacher [id=" + id + ", username=" + username + ", password=" + password + ", regTime=" + regTime
+		return "Teacher [id=" + id + ", loginName=" + loginName + ", password=" + password + ", regTime=" + regTime
 				+ ", teacherSex=" + teacherSex + ", idCard=" + idCard + ", trueName=" + trueName + ", address="
 				+ address + ", telphone=" + telphone + ", school=" + school + ", startSchoolYear=" + startSchoolYear
 				+ ", education=" + education + ", majorClass=" + majorClass + ", teacherCourses=" + teacherCourses

@@ -36,7 +36,10 @@
 			<result name="success">/WEB-INF/views/emp-list.jsp</result>
 		</action>
 		<action name="student-*" class="studentAction" method="{1}">
-			<result name="success">/WEB-INF/views/emp-list.jsp</result>
+			<result name="login-success">/WEB-INF/views/emp-list.jsp</result>
+		</action>
+		<action name="teacher-*" class="teacherAction" method="{1}">
+			<result name="login-success">/WEB-INF/views/emp-list.jsp</result>
 		</action>
 	</package>
 

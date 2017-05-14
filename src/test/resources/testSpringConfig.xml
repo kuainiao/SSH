@@ -7,6 +7,40 @@
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
 		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd">
 
+	<!-- AdminBean -->
+	<bean id="adminDao" class="com.yin.jiajiao.dao.impl.admin.AdminDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="adminService" class="com.yin.jiajiao.service.impl.admin.AdminServiceImpl">
+		<property name="adminDao" ref="adminDao"></property>
+	</bean>
+	<bean id="adminAction" class="com.yin.jiajiao.action.admin.AdminAction">
+		<property name="adminService" ref="adminService"></property>
+	</bean>
+
+	<!-- StudentBean -->
+	<bean id="studentDao" class="com.yin.jiajiao.dao.impl.student.StudentDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="studentService" class="com.yin.jiajiao.service.impl.student.StudentServiceImpl">
+		<property name="studentDao" ref="studentDao"></property>
+	</bean>
+	<bean id="studentAction" class="com.yin.jiajiao.action.student.StudentAction">
+		<property name="studentService" ref="studentService"></property>
+	</bean>
+
+	<!-- TeacherBean -->
+	<bean id="teacherDao" class="com.yin.jiajiao.dao.impl.teacher.TeacherDaoImpl">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+	<bean id="teacherService" class="com.yin.jiajiao.service.impl.teacher.TeacherServiceImpl">
+		<property name="teacherDao" ref="teacherDao"></property>
+	</bean>
+	<bean id="teacherAction" class="com.yin.jiajiao.action.teacher.TeacherAction">
+		<property name="teacherService" ref="teacherService"></property>
+	</bean>
+
+
 	<!-- 导入资源文件 -->
 	<context:property-placeholder location="classpath:db.properties" />
 
@@ -26,8 +60,7 @@
 		class="org.springframework.orm.hibernate4.LocalSessionFactoryBean">
 		<property name="dataSource" ref="dataSource"></property>
 		<property name="configLocation" value="classpath:hibernate.cfg.xml"></property>
-		<property name="mappingLocations"
-			value="classpath:com/yin/jiajiao/entities/*.hbm.xml"></property>
+		<property name="mappingLocations" value="classpath:com/yin/jiajiao/entities/*.hbm.xml"></property>
 	</bean>
 
 	<!-- 配置 Spring 的声明式事务 -->

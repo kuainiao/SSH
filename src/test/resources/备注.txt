@@ -1,0 +1,15 @@
+1、本来在src/test/resources文件目录下 有各种配置文件，但是在实际编码过程中发现，
+	web.xml中的spring配置文件是扫描的applicationContext*.xml，所以，会把
+	test目录下的配置文件也会扫描一遍，所以报错：没有配置对应的action。
+
+	解决方式：
+	1）、公用一份配置文件
+	2）、配置两种不同的文字
+	3）、同时修改两份配置文件
+
+2、使用同一份配置文件时：在test目录下的测试代码出现以下问题
+	ApplicationContext ac = new ClassPathXmlApplicationContext("applicationContext*.xml");
+	这种方式不能找到配置文件。
+	只能使用ApplicationContext ac = new FileSystemXmlApplicationContext("src/main/resources/applicationContext*.xml");
+	这种方式来获得配置文件
+	
