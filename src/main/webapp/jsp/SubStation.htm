@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<base target="_blank" />
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>中华家教吧城市联盟</title>
+		<META name="description" content="【中华家教吧总部】家教加盟,家教代理,家教网加盟,家教网代理,家教网站优化,家教吧官方网站,欢迎加盟" />
+		<META name="keywords" content="中华家教吧,家教加盟,家教代理" />
+		<script type="text/javascript" language="javascript">
+			//Marquee
+			function Marquee() {
+				this.ID = document.getElementById(arguments[0]);
+				if(!this.ID) {
+					this.ID = -1;
+					return;
+				}
+				this.Direction = this.Width = this.Height = this.DelayTime = this.WaitTime = this.CTL = this.StartID = this.Stop = this.MouseOver = 0;
+				this.Step = 1;
+				this.Timer = 30;
+				this.DirectionArray = {
+					"top": 0,
+					"up": 0,
+					"bottom": 1,
+					"down": 1,
+					"left": 2,
+					"right": 3
+				};
+				if(typeof arguments[1] == "number" || typeof arguments[1] == "string") this.Direction = arguments[1];
+				if(typeof arguments[2] == "number") this.Step = arguments[2];
+				if(typeof arguments[3] == "number") this.Width = arguments[3];
+				if(typeof arguments[4] == "number") this.Height = arguments[4];
+				if(typeof arguments[5] == "number") this.Timer = arguments[5];
+				if(typeof arguments[6] == "number") this.DelayTime = arguments[6];
+				if(typeof arguments[7] == "number") this.WaitTime = arguments[7];
+				if(typeof arguments[8] == "number") this.ScrollStep = arguments[8];
+				this.ID.style.overflow = this.ID.style.overflowX = this.ID.style.overflowY = "hidden";
+				this.ID.noWrap = true;
+				this.IsNotOpera = (navigator.userAgent.toLowerCase().indexOf("opera") == -1);
+				if(arguments.length >= 7) this.Start();
+			}
+
+			Marquee.prototype.Start = function() {
+				if(this.ID == -1) return;
+				if(this.WaitTime < 800) this.WaitTime = 800;
+				if(this.Timer < 20) this.Timer = 20;
+				if(this.Width == 0) this.Width = parseInt(this.ID.style.width);
+				if(this.Height == 0) this.Height = parseInt(this.ID.style.height);
+				if(typeof this.Direction == "string") this.Direction = this.DirectionArray[this.Direction.toString().toLowerCase()];
+				this.HalfWidth = Math.round(this.Width / 2);
+				this.HalfHeight = Math.round(this.Height / 2);
+				this.BakStep = this.Step;
+				this.ID.style.width = this.Width + "px";
+				this.ID.style.height = this.Height + "px";
+				if(typeof this.ScrollStep != "number") this.ScrollStep = this.Direction > 1 ? this.Width : this.Height;
+				var templateLeft = "<table cellspacing='0' cellpadding='0' style='border-collapse:collapse;display:inline;'><tr><td noWrap=true style='white-space: nowrap;word-break:keep-all;'>MSCLASS_TEMP_HTML</td><td noWrap=true style='white-space: nowrap;word-break:keep-all;'>MSCLASS_TEMP_HTML</td></tr></table>";
+				var templateTop = "<table cellspacing='0' cellpadding='0' style='border-collapse:collapse;'><tr><td>MSCLASS_TEMP_HTML</td></tr><tr><td>MSCLASS_TEMP_HTML</td></tr></table>";
+				var msobj = this;
+				msobj.tempHTML = msobj.ID.innerHTML;
+				if(msobj.Direction <= 1) {
+					msobj.ID.innerHTML = templateTop.replace(/MSCLASS_TEMP_HTML/g, msobj.ID.innerHTML);
+				} else {
+					if(msobj.ScrollStep == 0 && msobj.DelayTime == 0) {
+						msobj.ID.innerHTML += msobj.ID.innerHTML;
+					} else {
+						msobj.ID.innerHTML = templateLeft.replace(/MSCLASS_TEMP_HTML/g, msobj.ID.innerHTML);
+					}
+				}
+				var timer = this.Timer;
+				var delaytime = this.DelayTime;
+				var waittime = this.WaitTime;
+				msobj.StartID = function() {
+					msobj.Scroll()
+				}
+				msobj.Continue = function() {
+					if(msobj.MouseOver == 1) {
+						setTimeout(msobj.Continue, delaytime);
+					} else {
+						clearInterval(msobj.TimerID);
+						msobj.CTL = msobj.Stop = 0;
+						msobj.TimerID = setInterval(msobj.StartID, timer);
+					}
+				}
+
+				msobj.Pause = function() {
+					msobj.Stop = 1;
+					clearInterval(msobj.TimerID);
+					setTimeout(msobj.Continue, delaytime);
+				}
+
+				msobj.Begin = function() {
+					msobj.ClientScroll = msobj.Direction > 1 ? msobj.ID.scrollWidth / 2 : msobj.ID.scrollHeight / 2;
+					if((msobj.Direction <= 1 && msobj.ClientScroll <= msobj.Height + msobj.Step) || (msobj.Direction > 1 && msobj.ClientScroll <= msobj.Width + msobj.Step)) {
+						msobj.ID.innerHTML = msobj.tempHTML;
+						delete(msobj.tempHTML);
+						return;
+					}
+					delete(msobj.tempHTML);
+					msobj.TimerID = setInterval(msobj.StartID, timer);
+					if(msobj.ScrollStep < 0) return;
+					msobj.ID.onmousemove = function(event) {
+						if(msobj.ScrollStep == 0 && msobj.Direction > 1) {
+							var event = event || window.event;
+							if(window.event) {
+								if(msobj.IsNotOpera) {
+									msobj.EventLeft = event.srcElement.id == msobj.ID.id ? event.offsetX - msobj.ID.scrollLeft : event.srcElement.offsetLeft - msobj.ID.scrollLeft + event.offsetX;
+								} else {
+									msobj.ScrollStep = null;
+									return;
+								}
+							} else {
+								msobj.EventLeft = event.layerX - msobj.ID.scrollLeft;
+							}
+							msobj.Direction = msobj.EventLeft > msobj.HalfWidth ? 3 : 2;
+							msobj.AbsCenter = Math.abs(msobj.HalfWidth - msobj.EventLeft);
+							msobj.Step = Math.round(msobj.AbsCenter * (msobj.BakStep * 2) / msobj.HalfWidth);
+						}
+					}
+					msobj.ID.onmouseover = function() {
+						if(msobj.ScrollStep == 0) return;
+						msobj.MouseOver = 1;
+						clearInterval(msobj.TimerID);
+					}
+					msobj.ID.onmouseout = function() {
+						if(msobj.ScrollStep == 0) {
+							if(msobj.Step == 0) msobj.Step = 1;
+							return;
+						}
+						msobj.MouseOver = 0;
+						if(msobj.Stop == 0) {
+							clearInterval(msobj.TimerID);
+							msobj.TimerID = setInterval(msobj.StartID, timer);
+						}
+					}
+				}
+				setTimeout(msobj.Begin, waittime);
+			}
+
+			Marquee.prototype.Scroll = function() {
+				switch(this.Direction) {
+					case 0:
+						this.CTL += this.Step;
+						if(this.CTL >= this.ScrollStep && this.DelayTime > 0) {
+							this.ID.scrollTop += this.ScrollStep + this.Step - this.CTL;
+							this.Pause();
+							return;
+						} else {
+							if(this.ID.scrollTop >= this.ClientScroll) {
+								this.ID.scrollTop -= this.ClientScroll;
+							}
+							this.ID.scrollTop += this.Step;
+						}
+						break;
+
+					case 1:
+						this.CTL += this.Step;
+						if(this.CTL >= this.ScrollStep && this.DelayTime > 0) {
+							this.ID.scrollTop -= this.ScrollStep + this.Step - this.CTL;
+							this.Pause();
+							return;
+						} else {
+							if(this.ID.scrollTop <= 0) {
+								this.ID.scrollTop += this.ClientScroll;
+							}
+							this.ID.scrollTop -= this.Step;
+						}
+						break;
+
+					case 2:
+						this.CTL += this.Step;
+						if(this.CTL >= this.ScrollStep && this.DelayTime > 0) {
+							this.ID.scrollLeft += this.ScrollStep + this.Step - this.CTL;
+							this.Pause();
+							return;
+						} else {
+							if(this.ID.scrollLeft >= this.ClientScroll) {
+								this.ID.scrollLeft -= this.ClientScroll;
+							}
+							this.ID.scrollLeft += this.Step;
+						}
+						break;
+
+					case 3:
+						this.CTL += this.Step;
+						if(this.CTL >= this.ScrollStep && this.DelayTime > 0) {
+							this.ID.scrollLeft -= this.ScrollStep + this.Step - this.CTL;
+							this.Pause();
+							return;
+						} else {
+							if(this.ID.scrollLeft <= 0) {
+								this.ID.scrollLeft += this.ClientScroll;
+							}
+							this.ID.scrollLeft -= this.Step;
+						}
+						break;
+				}
+			}
+		</script>
+		<STYLE type=text/css>
+			body {
+				margin: 0px;
+				font-family: 微软雅黑, 宋体;
+				font-size: 14px;
+			}
+			
+			.mainTable {
+				width: 100%;
+				margin: 0px auto;
+				text-align: center;
+				background: url(http://img.wzjj8.com/zhjj8/bg_top_zhjj8.png) repeat-x 0px 0px;
+				LINE-HEIGHT: 24px;
+				HEIGHT: 25px;
+			}
+			
+			.mainTable .nav {
+				width: 960px;
+				margin: 0px auto;
+			}
+			
+			.mainTable .left {
+				float: left;
+				width: 205px;
+				text-align: left;
+				height: 25px;
+				overflow: hidden;
+			}
+			
+			.mainTable .right {
+				float: right;
+				width: 750px;
+				margin: 0px;
+				padding: 0px;
+				height: 25px;
+				overflow: hidden
+			}
+			
+			#marqueediv {
+				width: 205px;
+				margin: 0px;
+				padding: 0px;
+				height: 30px;
+			}
+			
+			#marqueediv ul {
+				width: 205px;
+				margin: 0px;
+				padding: 0px;
+				list-style: none;
+			}
+			
+			#marqueediv li {
+				width: 205px;
+				height: 25px;
+				line-height: 25px;
+				margin: 0px;
+				padding: 0px;
+				text-align: center;
+			}
+			
+			A {
+				COLOR: #333333;
+				text-decoration: none;
+			}
+			
+			A:hover {
+				COLOR: #ff5500;
+				text-decoration: underline;
+			}
+		</STYLE>
+	</head>
+
+	<body>
+		<div class="mainTable">
+			<div class="nav">
+				<div class="left">
+					<div id="marqueediv">
+						<ul>
+							<li>
+								<a href="http://www.zjkjj8.com/">张家口家教吧竭诚为您服务！</a>
+							</li>
+							<li>
+								<a href="http://www.zhjj8.com/">中华家教吧全国分站诚招代理</a>
+							</li>
+							<li>
+								<a href="https://user.qzone.qq.com/896839285/blog/1430983228">网站域名所有权可赠送给代理人</a>
+							</li>
+							<li>
+								<a href="https://user.qzone.qq.com/896839285/blog/1401634741">中华家教吧旗下优秀网站展示</a>
+							</li>
+							<li>
+								<a href="http://user.qzone.qq.com/896839285/blog/1468675652">张家口家教吧免责声明</a>
+							</li>
+							<li>
+								<a href="http://user.qzone.qq.com/896839285/blog/1468675445">网站所有权声明</a>
+							</li>
+						</ul>
+					</div>
+					<script type="text/javascript" language="javascript">
+						new Marquee("marqueediv", 0, 2, 205, 25, 0, 2000, 2000, 25);
+					</script>
+				</div>
+				<div class="right">
+					<a href="http://user.qzone.qq.com/896839285/blog/1467474123" title="中华家教吧投诉中心" style="color:#FF0000; font-weight:bold;">
+						教员投诉维权</a>
+					<a href="http://www.jiajiaoba.cn/" title="中华家教吧城市网站清单">全国总站</a>
+					<a href="http://www.sudajiajiao.com/">苏州</a>
+					<a href="http://www.zzjj8.com.cn/">郑州</a>
+					<a href="http://www.csjj8.com.cn/">长沙</a>
+					<a href="http://www.hfjjw.com.cn">合肥</a>
+					<a href="http://www.dljj8.cn/">大连</a>
+					<a href="http://www.wxjj8.com.cn/">无锡</a>
+					<a href="http://www.szjj8.com.cn/">深圳</a>
+					<a href="http://www.wzjj8.com/">温州</a>
+					<a href="http://www.shjj8.com/">上海</a>
+					<a href="http://www.zhjj8.com.cn/">珠海</a>
+					<a href="http://www.sjzjj8.cn/">石家庄</a>
+					<a href="http://www.nsdjj.com/">南京</a>
+					<a href="http://www.ncjj8.cn/">南昌</a>
+					<a href="http://www.ldjj.com.cn/">兰州</a>
+					<a href="http://www.btjj8.com/">包头</a>
+					<a href="http://www.zhjj8.com/" title="加盟中华家教吧全国分站" style="color:#FF0000;font-weight:bold;">加盟中华家教吧</a>
+				</div>
+			</div>
+		</div>
+
+	</body>
+
+</html>
