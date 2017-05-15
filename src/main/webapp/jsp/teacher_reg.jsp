@@ -3,9 +3,17 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath }/css/css_2017_zip.css">
-<link rel="Shortcut Icon" href="${pageContext.request.contextPath }/img/favicon.ico" />
+<link rel="stylesheet" type="text/css"
+	href="${pageContext.request.contextPath }/css/css_2017_zip.css">
+<link rel="Shortcut Icon"
+	href="${pageContext.request.contextPath }/img/favicon.ico" />
 <title>教师注册</title>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/js/jquery1.8.3.min.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/js/jquery-ui-1.8.2.js"></script>
+<script type="text/javascript"
+	src="${pageContext.request.contextPath }/js/teacher_reg.js"></script>
 <style type="text/css">
 #Logo {
 	WIDTH: 300px;
@@ -63,11 +71,6 @@
 		<TBODY>
 			<TR>
 				<TD height=6 bgcolor="#FFFFFF">
-				<script>
-					$(function() {
-						$("input:submit", "#myform").button();
-					});
-				</script>
 					<form method="post" action="/reg1.asp?action=save"
 						onSubmit="return ChkFields();" name="myform" id="myform">
 						<table width="100%" border="0" align="center" cellpadding="2"
@@ -78,12 +81,12 @@
 							<tr>
 								<td width="40%">
 									<div align="right">
-										<font size="2"><span class="red_link_10"
+										<font size="2"><span id="myclick" class="red_link_10"
 											style="font-weight: bold">*</span>设定登录用户名:</font>
 									</div>
 								</td>
-								<td width="60%"><input name="userid" type="text"
-									id="userid" class="reg_txt"></td>
+								<td width="60%" class="123"><input name="userid"
+									type="text" id="userid" class="reg_txt"></input><span>用户名必须用字母或字母加数字，且长度大于3位.</span></td>
 							</tr>
 							<tr>
 								<td>
@@ -94,7 +97,7 @@
 								</td>
 								<td><font size="2"> <input name="psw"
 										type="password" id="psw" class="reg_txt">
-								</font></td>
+								</font><span>密码长度不小于6位</span></td>
 							</tr>
 							<tr>
 								<td>
@@ -121,7 +124,8 @@
 								</td>
 							</tr>
 						</table>
-					</form></TD>
+					</form>
+				</TD>
 			</TR>
 		</TBODY>
 	</TABLE>

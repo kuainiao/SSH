@@ -67,8 +67,12 @@ public class TestAdminUser {
 		// user.setState("1");
 		user.setId(2);
 		user = adminService.findUserById(user);
+		
+//		Map<String, Object> session = ActionContext.getContext().getSession();
+//		session.put("user", user);
+		
 		System.out.println(user.toString());
-		user.setOperator("123");
+		user.setOperator("456");
 		adminService.saveUser(user);
 		System.out.println(user.toString());
 

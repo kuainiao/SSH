@@ -1,9 +1,7 @@
 package com.yin.jiajiao.service.impl.admin;
 
 import java.util.List;
-import java.util.Map;
 
-import com.opensymphony.xwork2.ActionContext;
 import com.yin.jiajiao.dao.inter.admin.IAdminDao;
 import com.yin.jiajiao.entities.User;
 import com.yin.jiajiao.service.inter.admin.IAdminService;
@@ -19,7 +17,6 @@ import com.yin.jiajiao.util.DateStringUtil;
  * @version 1.0
  */
 public class AdminServiceImpl implements IAdminService {
-	
 	private IAdminDao adminDao;
 
 	public void setAdminDao(IAdminDao adminDao) {
@@ -28,7 +25,7 @@ public class AdminServiceImpl implements IAdminService {
 
 	public User login(User user) {
 		user = adminDao.login(user);
-		if(user.getId() != null) {
+		if (user.getId() != null) {
 			user.setLastLoginTime(DateStringUtil.getCurTime_yyyyMMddHHmmss());
 			adminDao.updateLastLoginTime(user);
 		}
@@ -40,13 +37,13 @@ public class AdminServiceImpl implements IAdminService {
 	}
 
 	public boolean saveUser(User user) {
-//		Map<String, Object> session = ActionContext.getContext().getSession();
-//		User curUser = (User)session.get("user");
-//		if(user.getId() < 1) {
-//			user.setCreateUser(curUser.getId()+"|"+curUser.getUserName());
-//			user.setCreateTime(DateStringUtil.getCurTime_yyyyMMddHHmmss());
-//		}
-//		user.setOperator(curUser.getId()+"|"+curUser.getUserName());
+		// TODO 获得当前登录人信息
+		User curUser = new User();
+		if (user.getId() < 1) {
+			user.setCreateUser(curUser.getId() + "|" + curUser.getUserName());
+			user.setCreateTime(DateStringUtil.getCurTime_yyyyMMddHHmmss());
+		}
+		user.setOperator(curUser.getId() + "|" + curUser.getUserName());
 		user.setEditTime(DateStringUtil.getCurTime_yyyyMMddHHmmss());
 		return adminDao.saveUser(user);
 	}

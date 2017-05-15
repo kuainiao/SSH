@@ -3,7 +3,6 @@ package com.yin.jiajiao.action;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.yin.jiajiao.entities.Teacher;
-import com.yin.jiajiao.entities.User;
 import com.yin.jiajiao.service.inter.teacher.ITeacherService;
 
 /**
