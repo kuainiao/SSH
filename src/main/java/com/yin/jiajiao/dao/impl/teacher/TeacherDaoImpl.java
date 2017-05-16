@@ -56,4 +56,15 @@ public class TeacherDaoImpl extends BasDao<Teacher> implements ITeacherDao {
 		return count;
 	}
 
+	@Override
+	public boolean validationTeacherName(String teacherName) {
+		String hql = "FROM Teacher t WHERE t.loginName=?";
+		@SuppressWarnings("unchecked")
+		List<Teacher> lists = getSession().createQuery(hql).setString(0, teacherName).list();
+		if(lists == null || lists.size() == 0) {
+			return false;
+		}
+		return true;
+	}
+
 }

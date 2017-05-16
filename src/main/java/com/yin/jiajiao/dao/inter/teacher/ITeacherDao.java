@@ -22,4 +22,6 @@ public interface ITeacherDao {
 
 	public List<Teacher> findList();
 
+	public boolean validationTeacherName(String teacherName);
+
 }

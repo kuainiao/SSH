@@ -21,5 +21,7 @@ public interface ITeacherService {
 	public Teacher findTeacherById(Integer id);
 
 	public List<Teacher> findList();
+	
+	public boolean validationTeacherName(String teacherName);
 
 }

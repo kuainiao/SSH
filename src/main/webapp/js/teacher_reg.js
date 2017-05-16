@@ -18,11 +18,13 @@ $(function() {
 		$.post(url, args, function(data) {
 			// 表示可用
 			if (data == "1") {
-				$this.after("<font color='green'>LastName可用!</font>");
+				/*$this.after("<font color='green'>LastName可用!</font>");*/
+				alert("不能使用，已存在登录名");
 			}
 			// 不可用
 			else if (data == "0") {
-				$this.after("<font color='red'>LastName不可用!</font>");
+				/*$this.after("<font color='red'>LastName不可用!</font>");*/
+				alert("可以使用");
 			}
 			// 服务器错误
 			else {
@@ -33,7 +35,7 @@ $(function() {
 
 	$("#psw").blur(function() {
 		var pwd = $.trim($("#psw").val());
-		if (pwd.length < 6) {
+		if (pwd.length < 6 && pwd.length != 0) {
 			alert("密码不能小于6位");
 		}
 	});

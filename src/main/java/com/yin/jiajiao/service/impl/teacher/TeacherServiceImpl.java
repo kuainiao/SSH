@@ -42,4 +42,9 @@ public class TeacherServiceImpl implements ITeacherService {
 		return teacherDao.findList();
 	}
 
+	@Override
+	public boolean validationTeacherName(String teacherName) {
+		return teacherDao.validationTeacherName(teacherName);
+	}
+
 }
